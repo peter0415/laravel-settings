@@ -40,7 +40,13 @@ class SettingEloquentStorage implements SettingStorage
      */
     public function get($key, $default = null, $fresh = false)
     {
-        return $this->all($fresh)->get($key, $default);
+        $val = $this->all($fresh)->get($key, $default);
+        if ($val == null ) {
+            return config(sprintf('settings.%s.%s', $this->settingsGroupName, $key), null);
+        } else {
+            $arrVal = json_decode($val, true);
+            return $arrVal == null ? $val : $arrVal;
+        }
     }
 
     /**
@@ -62,7 +68,7 @@ class SettingEloquentStorage implements SettingStorage
             'group' => $this->settingsGroupName,
         ]);
 
-        $setting->val = $val;
+        $setting->val = is_array($val) ? json_encode($val) : $val;
         $setting->group = $this->settingsGroupName;
         $setting->save();
 
