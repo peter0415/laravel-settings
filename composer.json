@@ -1,7 +1,8 @@
 {
-  "name": "qcod/laravel-settings",
+  "name": "peter0415/laravel-settings",
+  "version": "1.2.3",
   "description": "Store key value pair in database as settings",
-  "homepage": "https://github.com/qcod/laravel-settings",
+  "homepage": "https://github.com/peter0415/laravel-settings",
   "type": "library",
   "license": "MIT",
   "keywords": [
